@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ngfk/todomvc-ts-redux#readme",
   "dependencies": {
-    "@ailurus/ts-redux": "^1.0.1",
+    "@ailurus/ts-redux": "^1.0.3",
     "@angular/common": "^4.2.0",
     "@angular/compiler": "^4.2.0",
     "@angular/core": "^4.2.0",
