@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es6",
+        "moduleResolution": "node",
+        "rootDir": "src",
+        "outDir": "dist",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "baseUrl": "src",
+        "paths": {
+            "todomvc-ts-redux/*": ["./*"]
+        }
+    }
+}
