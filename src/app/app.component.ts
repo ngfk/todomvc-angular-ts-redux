@@ -1,63 +1,29 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Todo, Filter } from 'todomvc-ts-redux/models';
-import { State, Actions } from 'todomvc-ts-redux/states';
-import { Store } from '@ailurus/ts-redux';
+import { StoreService } from 'todomvc-ts-redux/services';
 
 @Component({
     selector: 'todomvc-ts-redux',
     templateUrl: './app.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
 
-    public todos: Todo[];
-    public currentFilter: Filter;
+    public todosStream: Observable<Todo[]>;
+    public currentFilterStream: Observable<Filter>;
+
     public input: string = '';
     public Filter = Filter;
 
-    private id: number;
-    private unsubscribe: any;
-
-    constructor(
-        private cd: ChangeDetectorRef,
-        private store: Store<State, Actions>) { }
-
-    private get allChecked(): boolean {
-        return this.todos.every(todo => todo.completed);
-    }
-
-    private get activeCount(): number {
-        return this.todos.filter(todo => !todo.completed).length;
-    }
-
-    private get completedCount(): number {
-        return this.todos.filter(todo => todo.completed).length;        
-    }
-
-    public ngOnInit(): void {
-        const sync = (state: State): void => {
-            this.todos  = state.todos;
-            this.currentFilter = state.filter;
-        };
-
-        sync(this.store.getState());
-        this.id = this.todos.length > 0 ? Math.max(...this.todos.map(t => t.id)) : 0;
-        this.unsubscribe = this.store.subscribe(() => {
-            sync(this.store.getState());
-            this.cd.markForCheck();
-        });
-    }
-
-    public ngOnDestroy(): void {
-        this.unsubscribe();
+    constructor(private store: StoreService) {
+        this.todosStream = this.store.select(state => state.todos);
+        this.currentFilterStream = this.store.select(state => state.filter);
     }
 
     public add() {
         if (this.input) {
-            this.store.action('TODO_ADD').dispatch({
-                id: ++this.id,
-                text: this.input
-            });
+            this.store.action('TODO_ADD').dispatch({ text: this.input });
             this.input = '';
         }
     }
@@ -70,16 +36,20 @@ export class AppComponent implements OnInit, OnDestroy {
         this.store.action('TODO_TOGGLE').dispatch({ id: todo.id });
     }
 
-    public edit(todo: Todo): void {
+    public edit(event: KeyboardEvent | FocusEvent | MouseEvent, todo: Todo, input?: HTMLInputElement): void {
         this.store.action('TODO_EDIT').dispatch({ id: todo.id });
+        if (input)
+            input.focus();
     }
 
     public remove(todo: Todo): void {
         this.store.action('TODO_REMOVE').dispatch(todo.id);
     }
 
-    public update(todo: Todo, text: string) {
+    public update(event: KeyboardEvent | FocusEvent, todo: Todo, text: string) {
         this.store.action('TODO_UPDATE').dispatch({ id: todo.id, text });
+        this.edit(event, todo);
+        event.stopPropagation();
     }
 
     public setFilter(filter: Filter) {
@@ -88,5 +58,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
     public removeCompleted() {
         this.store.action('TODO_CLEAN').dispatch(undefined);
+    }
+
+    public getAllChecked(todos: Todo[]): boolean {
+        return todos.every(todo => todo.completed);
+    }
+
+    public getActiveCount(todos: Todo[]): number {
+        return todos.filter(todo => !todo.completed).length;
+    }
+
+    public getCompletedCount(todos: Todo[]): number {
+        return todos.filter(todo => todo.completed).length;        
     }
 }

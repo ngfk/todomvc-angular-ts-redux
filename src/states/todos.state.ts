@@ -4,7 +4,7 @@ import { Todo } from 'todomvc-ts-redux/models';
 export interface TodosState extends Array<Todo> {}
 
 export interface TodosActions {
-    'TODO_ADD': { id: number, text: string };
+    'TODO_ADD': { text: string };
     'TODO_REMOVE': number;
     'TODO_TOGGLE': { id?: number, completed?: boolean };
     'TODO_EDIT': { id: number, editing?: boolean };
@@ -12,9 +12,10 @@ export interface TodosActions {
     'TODO_CLEAN': undefined;
 }
 
+let id = 0;
 export const todo = new ReducerBuilder<Todo, TodosActions>()
     .case('TODO_ADD', (state, payload) => ({
-        id: payload.id,
+        id: id++,
         text: payload.text,
         completed: false,
         editing: false
@@ -68,6 +69,7 @@ export const todos = new ReducerBuilder<TodosState, TodosActions>()
         return state.map(t => todo(t, action));
     })
     .case('TODO_CLEAN', state => {
+        id = 0;
         return state.filter(todo => !todo.completed);
     })
     .build();
