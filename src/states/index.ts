@@ -1,5 +1,5 @@
 import { combineReducers } from '@ailurus/ts-redux';
-import * as Models from 'todomvc-ts-redux/models';
+import * as Models from 'app/models';
 import { FilterActions, filter } from './filter.state';
 import { TodosState, TodosActions, todos } from './todos.state';
 

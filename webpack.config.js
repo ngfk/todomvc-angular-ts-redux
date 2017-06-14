@@ -9,7 +9,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.css'],
         alias: {
-            'todomvc-ts-redux': path.join(__dirname, 'src')
+            'app': path.join(__dirname, 'src')
         }
     },
 

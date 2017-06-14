@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Todo, Filter } from 'todomvc-ts-redux/models';
-import { StoreService } from 'todomvc-ts-redux/services';
+import { Todo, Filter } from 'app/models';
+import { StoreService } from 'app/services';
 
 @Component({
-    selector: 'todomvc-ts-redux',
+    selector: 'app',
     templateUrl: './app.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -36,10 +36,8 @@ export class AppComponent {
         this.store.action('TODO_TOGGLE').dispatch({ id: todo.id });
     }
 
-    public edit(event: KeyboardEvent | FocusEvent | MouseEvent, todo: Todo, input?: HTMLInputElement): void {
+    public edit(event: KeyboardEvent | FocusEvent | MouseEvent, todo: Todo): void {
         this.store.action('TODO_EDIT').dispatch({ id: todo.id });
-        if (input)
-            input.focus();
     }
 
     public remove(todo: Todo): void {

@@ -1,5 +1,5 @@
 import { ReducerBuilder } from '@ailurus/ts-redux';
-import { Filter } from 'todomvc-ts-redux/models';
+import { Filter } from 'app/models';
 
 export interface FilterActions {
     'FILTER_SET': Filter

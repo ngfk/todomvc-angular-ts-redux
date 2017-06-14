@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Todo, Filter } from 'todomvc-ts-redux/models';
+import { Todo, Filter } from 'app/models';
 
 @Pipe({
     name: 'filter'

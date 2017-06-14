@@ -1,7 +1,7 @@
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import { Store } from '@ailurus/ts-redux';
-import { State, Actions, reducer} from 'todomvc-ts-redux/states';
+import { State, Actions, reducer} from 'app/states';
 
 export class StoreService extends Store<State, Actions> {
 

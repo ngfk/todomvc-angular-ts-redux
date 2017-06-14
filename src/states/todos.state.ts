@@ -1,5 +1,5 @@
 import { ReducerBuilder } from '@ailurus/ts-redux';
-import { Todo } from 'todomvc-ts-redux/models';
+import { Todo } from 'app/models';
 
 export interface TodosState extends Array<Todo> {}
 

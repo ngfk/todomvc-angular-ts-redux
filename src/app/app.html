@@ -20,7 +20,7 @@
 				<li *ngFor="let todo of todos | filter: (currentFilterStream | async)" [class.completed]="todo.completed" [class.editing]="todo.editing">
 					<div class="view">
 						<input class="toggle" type="checkbox" (click)="toggle(todo)" [checked]="todo.completed" />
-						<label (click)="edit($event, todo); editedtodo.focus()">{{todo.text}}</label>
+						<label (click)="edit($event, todo)">{{todo.text}}</label>
 						<button class="destroy" (click)="remove(todo)"></button>
 					</div>
 					<input class="edit"
