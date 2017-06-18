@@ -65495,7 +65495,7 @@ var Filter;
 
 class StoreService extends __WEBPACK_IMPORTED_MODULE_1__ailurus_ts_redux__["Store"] {
     constructor() {
-        super(__WEBPACK_IMPORTED_MODULE_2_app_states__["a" /* reducer */]);
+        super(__WEBPACK_IMPORTED_MODULE_2_app_states__["a" /* reducer */], undefined, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
         // Link Redux store subscription to custom states Observable
         this.stateSubj = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Rx__["BehaviorSubject"](this.getState());
         this.stateStream = this.stateSubj.asObservable();
