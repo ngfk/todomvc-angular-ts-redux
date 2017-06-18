@@ -7,8 +7,8 @@
                (keyup.enter)="add()"
                autofocus />
     </header>
-    <div *ngIf="todosStream | async as todos && todos.length > 0">
-        <section class="main">
+    <div *ngIf="todosStream | async as todos">
+        <section class="main" *ngIf="todos.length > 0">
             <input class="toggle-all"
                    type="checkbox"
                    #toggleall
@@ -34,7 +34,7 @@
                 </li>
             </ul>
         </section>
-        <footer class="footer">
+        <footer class="footer" *ngIf="todos.length > 0">
             <span class="todo-count"><strong>{{ activeCount }}</strong> {{ activeCount == 1 ? 'item' : 'items' }} left</span>
             <ul class="filters">
                 <li><a href="#" [class.selected]="currentFilter === Filter.All" (click)="setFilter(Filter.All)">All</a></li>
