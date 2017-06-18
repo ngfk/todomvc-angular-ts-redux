@@ -29,8 +29,7 @@
                            [value]="todo.text"
                            (keyup.enter)="update($event, todo, editedtodo.value)"
                            (keyup.escape)="edit($event, todo)"
-                           (focusout)="update($event, todo, editedtodo.value)"
-                           autofocus />
+                           (focusout)="update($event, todo, editedtodo.value)" />
                 </li>
             </ul>
         </section>
