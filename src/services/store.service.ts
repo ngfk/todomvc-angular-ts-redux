@@ -9,7 +9,11 @@ export class StoreService extends Store<State, Actions> {
     private stateSubj: BehaviorSubject<State>;
 
     constructor() {
-        super(reducer);
+        super(
+            reducer,
+            undefined,
+            (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+        );
 
         // Link Redux store subscription to custom states Observable
         this.stateSubj   = new BehaviorSubject<State>(this.getState());
