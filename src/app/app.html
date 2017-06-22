@@ -40,7 +40,7 @@
                 <li><a href="#" [class.selected]="currentFilter === Filter.Active" (click)="setFilter(Filter.Active)">Active</a></li>
                 <li><a href="#" [class.selected]="currentFilter === Filter.Completed" (click)="setFilter(Filter.Completed)">Completed</a></li>
             </ul>
-            <button class="clear-completed" *ngIf="completedCount > 0" (click)="removeCompleted()">Clear completed</button>
+            <button class="clear-completed" *ngIf="getCompletedCount(todos) > 0" (click)="removeCompleted()">Clear completed</button>
         </footer>
     </div>
 </section>
