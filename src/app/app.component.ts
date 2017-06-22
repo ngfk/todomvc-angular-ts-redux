@@ -16,6 +16,8 @@ export class AppComponent {
     public input: string = '';
     public Filter = Filter;
 
+    private id = 0;
+
     constructor(private store: StoreService) {
         this.todosStream = this.store.select(state => state.todos);
         this.currentFilterStream = this.store.select(state => state.filter);
@@ -23,7 +25,7 @@ export class AppComponent {
 
     public add() {
         if (this.input) {
-            this.store.action('TODO_ADD').dispatch({ text: this.input });
+            this.store.action('TODO_ADD').dispatch({ id: this.id++, text: this.input });
             this.input = '';
         }
     }

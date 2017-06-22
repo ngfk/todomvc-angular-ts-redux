@@ -1,10 +1,10 @@
-import { ReducerBuilder } from '@ailurus/ts-redux';
+import { ReducerBuilder, createReducer } from '@ailurus/ts-redux';
 import { Todo } from 'app/models';
 
 export interface TodosState extends Array<Todo> {}
 
 export interface TodosActions {
-    'TODO_ADD': { text: string };
+    'TODO_ADD': { id: number, text: string };
     'TODO_REMOVE': number;
     'TODO_TOGGLE': { id?: number, completed?: boolean };
     'TODO_EDIT': { id: number, editing?: boolean };
@@ -12,11 +12,9 @@ export interface TodosActions {
     'TODO_CLEAN': undefined;
 }
 
-let id = 0;
 export const todo = new ReducerBuilder<Todo, TodosActions>()
     .case('TODO_ADD', (state, payload) => ({
-        id: id++,
-        text: payload.text,
+        ...payload,
         completed: false,
         editing: false
     }))
@@ -50,26 +48,24 @@ export const todo = new ReducerBuilder<Todo, TodosActions>()
     }))
     .build();
 
-export const todos = new ReducerBuilder<TodosState, TodosActions>()
-    .init([])
-    .case('TODO_ADD', (state, payload, action) => [
+export const todos = createReducer<TodosState, TodosActions>([], {
+    TODO_ADD: (state, payload, action) => [
         ...state,
         todo({} as Todo, action)
-    ])
-    .case('TODO_REMOVE', (state, payload) => {
+    ],
+    TODO_REMOVE: (state, payload) => {
         return state.filter(todo => todo.id !== payload);
-    })
-    .case('TODO_TOGGLE', (state, payload, action) => {
+    },
+    TODO_TOGGLE: (state, payload, action) => {
         return state.map(t => todo(t, action));
-    })
-    .case('TODO_EDIT', (state, payload, action) => {
+    },
+    TODO_EDIT: (state, payload, action) => {
         return state.map(t => todo(t, action));
-    })
-    .case('TODO_UPDATE', (state, payload, action) => {
+    },
+    TODO_UPDATE: (state, payload, action) => {
         return state.map(t => todo(t, action));
-    })
-    .case('TODO_CLEAN', state => {
-        id = 0;
+    },
+    TODO_CLEAN: state => {
         return state.filter(todo => !todo.completed);
-    })
-    .build();
+    }
+});
