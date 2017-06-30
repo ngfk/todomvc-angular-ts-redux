@@ -7,6 +7,8 @@
         "outDir": "dist",
         "noImplicitAny": true,
         "strictNullChecks": true,
+        "noStrictGenericChecks": true,
+        "skipLibCheck": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "baseUrl": "src",
