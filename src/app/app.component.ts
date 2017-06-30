@@ -1,5 +1,7 @@
 import { Observable } from 'rxjs/Rx';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import * as uuid from 'uuid';
+
 import { Todo, Filter } from 'app/models';
 import { StoreService } from 'app/services';
 
@@ -10,22 +12,20 @@ import { StoreService } from 'app/services';
 })
 export class AppComponent {
 
-    public todosStream: Observable<Todo[]>;
-    public currentFilterStream: Observable<Filter>;
+    public todos$: Observable<Todo[]>;
+    public filter$: Observable<Filter>;
 
-    public input: string = '';
+    public input = '';
     public Filter = Filter;
 
-    private id = 0;
-
     constructor(private store: StoreService) {
-        this.todosStream = this.store.select(state => state.todos);
-        this.currentFilterStream = this.store.select(state => state.filter);
+        this.todos$  = this.store.select(state => state.todos);
+        this.filter$ = this.store.select(state => state.filter);
     }
 
     public add() {
         if (this.input) {
-            this.store.action('TODO_ADD').dispatch({ id: this.id++, text: this.input });
+            this.store.action('TODO_ADD').dispatch({ id: uuid.v4(), text: this.input });
             this.input = '';
         }
     }
@@ -43,7 +43,7 @@ export class AppComponent {
     }
 
     public remove(todo: Todo): void {
-        this.store.action('TODO_REMOVE').dispatch(todo.id);
+        this.store.action('TODO_REMOVE').dispatch({ id: todo.id });
     }
 
     public update(event: KeyboardEvent | FocusEvent, todo: Todo, text: string) {

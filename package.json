@@ -33,10 +33,12 @@
     "redux": "^3.7.1",
     "rxjs": "^5.4.1",
     "todomvc-app-css": "^2.1.0",
+    "uuid": "^3.1.0",
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
     "@types/node": "^8.0.6",
+    "@types/uuid": "^3.0.0",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.2.1",
     "css-loader": "^0.28.4",

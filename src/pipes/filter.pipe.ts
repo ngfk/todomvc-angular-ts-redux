@@ -1,9 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Todo, Filter } from 'app/models';
 
-@Pipe({
-    name: 'filter'
-})
+@Pipe({ name: 'filter' })
 export class FilterPipe implements PipeTransform {
 
     public transform (todos: Todo[], filter: Filter): Todo[] {

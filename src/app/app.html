@@ -7,7 +7,7 @@
                (keyup.enter)="add()"
                autofocus />
     </header>
-    <div *ngIf="todosStream | async as todos">
+    <div *ngIf="todos$ | async as todos">
         <section class="main" *ngIf="todos.length > 0">
             <input class="toggle-all"
                    type="checkbox"
@@ -17,7 +17,7 @@
             <label for="toggle-all">Mark all as complete</label>
 
             <ul class="todo-list">
-                <li *ngFor="let todo of todos | filter: (currentFilterStream | async)" [class.completed]="todo.completed" [class.editing]="todo.editing">
+                <li *ngFor="let todo of todos | filter: (filter$ | async)" [class.completed]="todo.completed" [class.editing]="todo.editing">
                     <div class="view">
                         <input class="toggle" type="checkbox" (click)="toggle(todo)" [checked]="todo.completed" />
                         <label (click)="edit($event, todo)">{{todo.text}}</label>
