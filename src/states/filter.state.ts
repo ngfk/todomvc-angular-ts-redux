@@ -6,5 +6,5 @@ export interface FilterActions {
 }
 
 export const filter = createReducer<Filter, FilterActions>(Filter.All, {
-    FILTER_SET: (state, payload) => payload
+    'FILTER_SET': (state, payload) => payload
 });

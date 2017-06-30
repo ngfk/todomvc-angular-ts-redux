@@ -47,23 +47,23 @@ export const todo = new ReducerBuilder<Todo, TodosActions>()
     .build();
 
 export const todos = createReducer<Todo[], TodosActions>([], {
-    TODO_ADD: (state, payload, action) => [
+    'TODO_ADD': (state, payload, action) => [
         ...state,
         todo({} as Todo, action)
     ],
-    TODO_REMOVE: (state, payload) => {
+    'TODO_REMOVE': (state, payload) => {
         return state.filter(todo => todo.id !== payload.id);
     },
-    TODO_TOGGLE: (state, payload, action) => {
+    'TODO_TOGGLE': (state, payload, action) => {
         return state.map(t => todo(t, action));
     },
-    TODO_EDIT: (state, payload, action) => {
+    'TODO_EDIT': (state, payload, action) => {
         return state.map(t => todo(t, action));
     },
-    TODO_UPDATE: (state, payload, action) => {
+    'TODO_UPDATE': (state, payload, action) => {
         return state.map(t => todo(t, action));
     },
-    TODO_CLEAN: state => {
+    'TODO_CLEAN': state => {
         return state.filter(todo => !todo.completed);
     }
 });
