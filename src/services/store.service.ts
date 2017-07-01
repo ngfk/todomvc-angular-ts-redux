@@ -5,7 +5,7 @@ import { State, Actions, reducer} from 'app/states';
 
 export class StoreService extends Store<State, Actions> {
 
-    public stateStream: Observable<State>;
+    public state$: Observable<State>;
     private stateSubj: BehaviorSubject<State>;
 
     constructor() {
@@ -15,13 +15,13 @@ export class StoreService extends Store<State, Actions> {
             (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
         );
 
-        // Link Redux store subscription to custom states Observable
-        this.stateSubj   = new BehaviorSubject<State>(this.getState());
-        this.stateStream = this.stateSubj.asObservable();
+        // Link Redux store subscription to custom state stream
+        this.stateSubj = new BehaviorSubject<State>(this.getState());
+        this.state$    = this.stateSubj.asObservable();
         super.subscribe(() => this.stateSubj.next(this.getState()));
     }
 
     public select<T>(selector: (state: State) => T): Observable<T> {
-        return this.stateStream.map(selector).distinctUntilChanged();
+        return this.state$.map(selector).distinctUntilChanged();
     }
 }
