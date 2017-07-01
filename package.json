@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ngfk/todomvc-ts-redux#readme",
   "dependencies": {
-    "@ailurus/ts-redux": "^1.2.3",
+    "@ailurus/ts-redux": "^1.3.0",
     "@angular/common": "^4.2.5",
     "@angular/compiler": "^4.2.5",
     "@angular/core": "^4.2.5",
@@ -37,7 +37,7 @@
     "zone.js": "^0.8.12"
   },
   "devDependencies": {
-    "@types/node": "^8.0.6",
+    "@types/node": "^8.0.7",
     "@types/uuid": "^3.0.0",
     "angular2-template-loader": "^0.6.2",
     "awesome-typescript-loader": "^3.2.1",
