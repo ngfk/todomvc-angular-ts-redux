@@ -17,4 +17,8 @@ deploy:
     branch: master
   local_dir: dist
   target_branch: gh-pages
-  
+
+notifications:
+  email:
+    on_success: never
+    on_failure: always
