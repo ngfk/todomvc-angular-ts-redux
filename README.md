@@ -7,3 +7,4 @@
 * [Angular](https://angular.io)
 * [TS-Redux](https://github.com/ngfk/ts-redux)
 * [Redux](https://github.com/reactjs/redux)
+* [HMR](https://github.com/AngularClass/angular-hmr)
