@@ -12,7 +12,7 @@ export function storeFactory() {
     if (!STORE_CACHE)
         STORE_CACHE = new StoreService();
     return STORE_CACHE;
-};
+}
 
 @Injectable()
 export class StoreService extends Store<State, Actions> {
@@ -21,7 +21,7 @@ export class StoreService extends Store<State, Actions> {
         provide: StoreService,
         useFactory: storeFactory,
         deps: []
-    }
+    };
 
     public state$: Observable<State>;
     public initialState: State;
