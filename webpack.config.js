@@ -8,7 +8,7 @@ const { AotPlugin }     = require('@ngtools/webpack');
 // Environment defaults to development
 process.env.NODE_ENV = process.env.NODE_ENV
     ? process.env.NODE_ENV.toLowerCase()
-    : process.env.NODE_ENV = 'development';
+    : 'development';
 
 // Common configuration
 const common = {
